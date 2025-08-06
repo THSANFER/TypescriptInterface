@@ -79,7 +79,7 @@ const usuario2: IUser = {
 
 //Instâncias para produto
 const produto1: IProduct = {
-    id: 432,
+    id: 100,
     name: "Bola de Futebol",
     price: 49.99,
     inStock: true,
@@ -88,7 +88,7 @@ const produto1: IProduct = {
 }
 
 const produto2: IProduct = {
-    id: 259,
+    id: 200,
     name: "Cerveja Brahma 350ml",
     price: 6.29,
     inStock: false,
@@ -112,9 +112,9 @@ const credencial2: IAdminUser = {
     role: "Admin"
 }
 
-imprimirDetalhesDoUsuario(usuario1);
-imprimirDetalhesProduto(produto2);
-imprimirAdminUser(credencial1);
+//imprimirDetalhesDoUsuario(usuario1);
+//imprimirDetalhesProduto(produto2);
+//imprimirAdminUser(credencial1);
 
 
 
@@ -142,26 +142,16 @@ const textoRetornado = getData(texto);
 const user: IUser[] = [usuario1]
 const userRetornado = getData(user);
 
-console.log("\nArray de números:", numeroRetornado);
-console.log("\nArray de strings:", textoRetornado);
-console.log("\nArray de usuários:", userRetornado);
+//console.log("\nArray de números:", numeroRetornado);
+//console.log("\nArray de strings:", textoRetornado);
+//console.log("\nArray de usuários:", userRetornado);
 
 //Crie uma função genérica chamada `getById<T extends { id: number }>(items: T[], id: number): T | undefined` 
 // que recebe um array de objetos que possuem uma propriedade `id` (number) e um `id` para procurar. 
 // A função deve retornar o objeto correspondente ou `undefined`. Teste com arrays de `IUser` e `IProduct`.
 
-/**
- * Procura um item em um array de objetos pelo seu 'id'.
- * A função é genérica, mas exige que cada objeto tenha uma propriedade 'id' do tipo number.
- * @template T - O tipo genérico, restrito a objetos que possuem { id: number }.
- * @param {T[]} items - O array de objetos para pesquisar.
- * @param {number} id - O ID do item a ser encontrado.
- * @returns {T | undefined} O objeto encontrado ou 'undefined' se não for encontrado.
- */
+
 function getById<T extends { id: number }>(items: T[], id: number): T | undefined {
-  // O método .find() é ideal aqui. Ele itera sobre o array e retorna
-  // o primeiro 'item' para o qual a condição 'item.id === id' é verdadeira.
-  // Se nenhum item for encontrado, .find() retorna 'undefined' automaticamente.
   return items.find(item => item.id === id);
 }
 
@@ -170,17 +160,17 @@ const produtos: IProduct[] = [produto1, produto2];
 
 console.log("\nBuscando no array de usuários...");
 
-const usuarioEncontrado = getById(usuarios, 25);
-if (usuarioEncontrado) {
-    console.log(`Usuário com ID ${usuario1.id} encontrado: ${usuarioEncontrado.name}`);
+const buscaUsuario = getById(usuarios, 1);
+if (buscaUsuario) {
+    console.log(`Usuário com a ID informada: ${buscaUsuario.name}`);
 } else {
     console.log("Usuário não encontrado com a ID informada.");
 }
 
 console.log("\nBuscando no array de produtos...");
-const produtoEncontrado = getById(produtos, 148);
-if (produtoEncontrado) {
-    console.log(`Produto com ID ${produto1.id} encontrado: ${produtoEncontrado.name} (Preço: R$${produtoEncontrado.price})`);
+const buscaProduto = getById(produtos,100 );
+if (buscaProduto) {
+    console.log(`Produto com a ID informada: ${buscaProduto.name} (Preço: R$${buscaProduto.price})`);
 } else {
     console.log("Produto não encontrado com a ID informada.");
 }
