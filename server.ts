@@ -82,17 +82,31 @@ app.delete('/users/:id', (req: Request, res: Response) => {
   res.status(204).send();
 });
 
-app.delete('/usersa/:email', (req:Request, res: Response) => {
-    const emailParaDeletar = req.params.email;
-    const indexDoUsuario = usuarios.findIndex(user => user.email === emailParaDeletar);
-    
+app.delete('/usersn/:name', (req: Request, res:Response) => {
+    const nomeParaDeletar = req.params.name;
+    const indexDoUsuario = usuarios.findIndex(user => user.name === nomeParaDeletar);
+
     if (indexDoUsuario === -1){
         return res.status(404).json({message: 'Usuário não encontrado.'});
     }
 
     usuarios.splice(indexDoUsuario,1);
     res.status(204).send();
-})
+}
+
+)
+app.delete('/userse/:email', (req:Request, res: Response) => {
+    const emailParaDeletar = req.params.email;
+    const indexDoUsuario = usuarios.findIndex(user => user.email === emailParaDeletar);
+
+    if (indexDoUsuario === -1){
+        return res.status(404).json({message: 'Usuário não encontrado.'});
+    }
+
+    usuarios.splice(indexDoUsuario,1);
+    res.status(204).send();
+});
+
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta http://localhost:${port}`);
