@@ -50,7 +50,7 @@ app.post('/users', (req: Request, res: Response) => {
   res.status(201).json(novoUsuario);
 });
 
-app.put('/users/:id', (req: Request, res: Response) => {
+app.put('/usersai/:id', (req: Request, res: Response) => {
   const idParaAtualizar = parseInt(req.params.id, 10);
   const dadosAtualizados = req.body;
 
@@ -65,8 +65,38 @@ app.put('/users/:id', (req: Request, res: Response) => {
   res.json(usuarios[indexDoUsuario]);
 });
 
+app.put('/usersan/:name', (req:Request, res: Response) => {
+    const nomeParaAtualizar = req.params.name;
+    const dadosAtualizados = req.body;
+
+    const indexDoUsuario = usuarios.findIndex(user => user.name === nomeParaAtualizar);
+    
+    if (indexDoUsuario === -1){
+        return res.status(404).json({message: 'Usuário não encontrado'});
+    }
+
+    usuarios[indexDoUsuario] = { ...usuarios[indexDoUsuario], ...dadosAtualizados};
+
+    res.json(usuarios[indexDoUsuario]);
+});
+
+app.put('/usersae/:email', (req:Request, res: Response) => {
+    const emailParaAtualizar = req.params.email;
+    const dadosAtualizados = req.body;
+
+    const indexDoUsuario = usuarios.findIndex(user => user.email === emailParaAtualizar);
+    
+    if (indexDoUsuario === -1){
+        return res.status(404).json({message: 'Usuário não encontrado'});
+    }
+
+    usuarios[indexDoUsuario] = { ...usuarios[indexDoUsuario], ...dadosAtualizados};
+
+    res.json(usuarios[indexDoUsuario]);
+});
+
 // DELETE /users/:id - Deleta um usuário
-app.delete('/users/:id', (req: Request, res: Response) => {
+app.delete('/usersdi/:id', (req: Request, res: Response) => {
   // 1. Pega o ID da URL
   const idParaDeletar = parseInt(req.params.id, 10);
 
@@ -82,7 +112,7 @@ app.delete('/users/:id', (req: Request, res: Response) => {
   res.status(204).send();
 });
 
-app.delete('/usersn/:name', (req: Request, res:Response) => {
+app.delete('/usersdn/:name', (req: Request, res:Response) => {
     const nomeParaDeletar = req.params.name;
     const indexDoUsuario = usuarios.findIndex(user => user.name === nomeParaDeletar);
 
@@ -95,7 +125,7 @@ app.delete('/usersn/:name', (req: Request, res:Response) => {
 }
 
 )
-app.delete('/userse/:email', (req:Request, res: Response) => {
+app.delete('/usersde/:email', (req:Request, res: Response) => {
     const emailParaDeletar = req.params.email;
     const indexDoUsuario = usuarios.findIndex(user => user.email === emailParaDeletar);
 
